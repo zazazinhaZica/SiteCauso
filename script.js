@@ -89,9 +89,9 @@ botaoEnviar.addEventListener('click', async function(evento) {
         .insert([{ autor: autor, text: textoDigitado }])
         .select();
 
-    if (error) {
-        console.error('Erro ao salvar:', error);
-        alert('Erro ao publicar o causo: ' + error.message);
+if (error) {
+        console.error('Erro completo do Supabase:', JSON.stringify(error, null, 2));
+        alert('Erro ao publicar o causo: ' + (error.message || JSON.stringify(error)));
         return;
     }
 
