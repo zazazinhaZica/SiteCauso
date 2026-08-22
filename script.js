@@ -1,8 +1,6 @@
-// 1. Conexão com o Supabase (Cole suas credenciais aqui)
 const SUPABASE_URL = 'https://gkvfxmuhoqkvmxpyoqrd.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Vryk6FbOTyTwLCqMkK8hFQ_-WQSz_uN';
 
-// Inicializa o cliente do Supabase
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const botaoEnviar = document.getElementById('botaoEnviar');
@@ -12,33 +10,32 @@ const mural = document.getElementById('mural');
 async function carregarCausos() {
     mural.innerHTML = '<p>Carregando causos...</p>';
 
-    // Pega os dados da tabela 'causos', ordenados do mais recente para o mais antigo
+    // Pega os dados da tabela 'causos' sem ordenar por id
     const { data: causos, error } = await supabaseClient
         .from('causos')
-        .select('*')
-        .order('id', { ascending: false });
+        .select('*');
 
     if (error) {
-        console.error('Erro detalhado do Supabase:', error.message, error.details, error.hint);
-        alert('Erro ao carregar os causos: ' + error.message);
+        console.error('Erro detalhado do Supabase:', JSON.stringify(error, null, 2));
+        mural.innerHTML = '<p>Erro ao carregar os causos.</p>';
         return;
     }
 
-    mural.innerHTML = ''; // Limpa o "Carregando..."
+    mural.innerHTML = ''; 
 
     if (causos.length === 0) {
         mural.innerHTML = '<p>Ainda não há causos publicados. Seja o primeiro!</p>';
         return;
     }
 
-    // Desenha cada causo na tela (usando causo.text aqui)
+    // Desenha cada causo na tela
     causos.forEach(causo => {
-        criarCartaoNaTela(causo.id, causo.autor, causo.text);
+        criarCartaoNaTela(causo.autor, causo.text);
     });
 }
 
-// Função auxiliar para desenhar o HTML do cartão (recebendo text)
-function criarCartaoNaTela(id, autor, text) {
+// Função auxiliar para desenhar o HTML do cartão
+function criarCartaoNaTela(autor, text) {
     const cartao = document.createElement('div');
     cartao.classList.add('cartao-causo');  
 
@@ -48,16 +45,16 @@ function criarCartaoNaTela(id, autor, text) {
             <span class="autor-causo">${autor}</span>
             <span class="data-causo">hoje</span>
         </div>
-        <button class="botao-apagar" data-id="${id}">Apagar</button>
+        <button class="botao-apagar">Apagar</button>
     `;
 
-    // Lógica para apagar o causo do banco de dados e da tela
+    // Lógica para apagar o causo do banco de dados pelo texto exato
     const botaoApagar = cartao.querySelector('.botao-apagar');
     botaoApagar.addEventListener('click', async function() {
         const { error } = await supabaseClient
             .from('causos')
             .delete()
-            .eq('id', id);
+            .eq('text', text);
 
         if (!error) {
             cartao.remove();
@@ -83,24 +80,22 @@ botaoEnviar.addEventListener('click', async function(evento) {
 
     const autor = nomeDigitado.trim() === "" ? "anônimo" : nomeDigitado;
 
-    // Salva lá no Banco de Dados do Supabase (enviando a coluna 'text')
+    // Salva no Supabase
     const { data, error } = await supabaseClient
         .from('causos')
         .insert([{ autor: autor, text: textoDigitado }])
         .select();
 
-if (error) {
-        console.error('Erro completo do Supabase:', JSON.stringify(error, null, 2));
-        alert('Erro ao publicar o causo: ' + (error.message || JSON.stringify(error)));
+    if (error) {
+        console.error('Erro ao salvar:', JSON.stringify(error, null, 2));
+        alert('Erro ao publicar o causo.');
         return;
     }
 
-    // Se salvou com sucesso, limpa os campos e esconde o formulário
     document.getElementById('nome').value = '';
     document.getElementById('textoCauso').value = '';
     document.getElementById('caixaFormulario').classList.add('escondido');
 
-    // Recarrega os causos para o novo aparecer na hora
     carregarCausos();
 });
 
