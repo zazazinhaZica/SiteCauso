@@ -18,9 +18,9 @@ async function carregarCausos() {
         .select('*')
         .order('id', { ascending: false }); // Se preferir por ID decrescente
 
-    if (error) {
-        console.error('Erro ao carregar:', error);
-        mural.innerHTML = '<p>Erro ao carregar os causos.</p>';
+  if (error) {
+        console.error('Erro detalhado do Supabase:', error.message, error.details, error.hint);
+        alert('Erro ao publicar o causo: ' + error.message);
         return;
     }
 
