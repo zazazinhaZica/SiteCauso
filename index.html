@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Causo - Conte qualquer coisa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header> 
+        <input type="button" value="Conte um Causo" id="botaoCauso">
+        <p id="paragrafoTitulo">Causo histórias e aleatoriedades</p>
+    </header>
+
+    <form id="caixaFormulario" class="escondido">
+        <label for="nome">Seu nome: </label>
+        <input type="text" name="nome" id="nome" placeholder="Ex: Ana" required>
+        <br><br>
+        <label for="textoCauso">O que tem na sua mente?</label>
+        <textarea id="textoCauso" placeholder="Escreva seu causo aqui... sem pressa."></textarea>
+        <br>
+        <button type="submit" id="botaoEnviar">Publicar Causo</button>
+    </form>
+
+    <main> 
+        <h1>Todo mundo tem um Causo</h1>
+        <p>Um lugar para compartilhar sentimentos, algo que aconteceu hoje, ou qualquer coisa aleatória que aconteceu com você!</p>
+
+        <div id="mural"></div>
+    </main>
+  
+    <footer> 
+        <p>Causo - histórias aleatórias e comuns, sem julgamento.</p>
+    </footer>
+
+    <!-- Scripts do site -->
+    <script src="script.js"></script>
+    <script>
+        const botaoAbrir = document.getElementById('botaoCauso');
+        const caixaFormulario = document.getElementById('caixaFormulario');
+     
+        botaoAbrir.addEventListener('click', function() {
+            caixaFormulario.classList.toggle('escondido');
+        });
+    </script>
+</body>
+</html>

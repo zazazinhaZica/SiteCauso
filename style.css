@@ -1,0 +1,209 @@
+body {
+    background-color: #F5F0E8;  
+    font-family: sans-serif;
+    color: #2b2b2b;
+    margin: 0;
+    padding: 0;
+}
+
+ 
+header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;             
+    padding: 20px 40px;             
+    border-bottom: 1px solid #000000;  
+}
+
+#paragrafoTitulo {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+ 
+#botaoCauso {
+    background-color: #b54a32; 
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#botaoCauso:hover {
+    background-color: #9c3e29;  
+}
+
+ 
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center; 
+}
+
+main h1 {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+main > p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+ 
+#mural {
+    margin-top: 30px;
+    text-align: left;  
+}
+ 
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #777;
+    border-top: 1px solid #000000;
+    margin-top: 60px;
+}
+ 
+#caixaFormulario {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #faf6f0;  
+    border: 1px solid #dcd6cd;
+    border-radius: 6px;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);  
+}
+
+ 
+.escondido {
+    display: none;
+}
+
+/* Rótulos e inputs (Nome) */
+#caixaFormulario label {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+#caixaFormulario input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dcd6cd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+ 
+#caixaFormulario textarea {
+    width: 100%;
+    height: 130px;
+    padding: 12px;
+    border: 1px solid #dcd6cd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+ 
+#botaoEnviar {
+    background-color: #b54a32;  
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+
+#botaoEnviar:hover {
+    background-color: #9c3e29;
+}
+.cartao-causo {
+    background-color: #faf6f0;
+    border: 1px solid #dcd6cd;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.cartao-causo .texto-causo {
+    font-size: 1.05rem;
+    color: #2b2b2b;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.cartao-causo .rodape-cartao {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #777;}
+
+    .cartao-causo {
+    position: relative; 
+    background-color: #faf6f0;
+    border: 1px solid #dcd6cd;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    text-align: left;
+}
+
+.cartao-causo .texto-causo {
+    font-size: 1.05rem;
+    color: #2b2b2b;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    padding-right: 30px;  
+}
+
+.cartao-causo .rodape-cartao {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+ 
+.botao-apagar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.botao-apagar:hover {
+    background-color: #f2e6dc;
+    color: #b54a32; }
