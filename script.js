@@ -6,11 +6,11 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const botaoEnviar = document.getElementById('botaoEnviar');
 const mural = document.getElementById('mural');
 
-// Função para buscar e desenhar todos os causos do banco na tela
+ 
 async function carregarCausos() {
     mural.innerHTML = '<p>Carregando causos...</p>';
 
-    // Pega os dados da tabela 'causos' sem ordenar por id
+     
     const { data: causos, error } = await supabaseClient
         .from('causos')
         .select('*');
@@ -28,13 +28,13 @@ async function carregarCausos() {
         return;
     }
 
-    // Desenha cada causo na tela
+   
     causos.forEach(causo => {
         criarCartaoNaTela(causo.autor, causo.text);
     });
 }
 
-// Função auxiliar para desenhar o HTML do cartão
+ 
 function criarCartaoNaTela(autor, text) {
     const cartao = document.createElement('div');
     cartao.classList.add('cartao-causo');  
@@ -48,7 +48,7 @@ function criarCartaoNaTela(autor, text) {
         <button class="botao-apagar">Apagar</button>
     `;
 
-    // Lógica para apagar o causo do banco de dados pelo texto exato
+     
     const botaoApagar = cartao.querySelector('.botao-apagar');
     botaoApagar.addEventListener('click', async function() {
         const { error } = await supabaseClient
@@ -66,7 +66,7 @@ function criarCartaoNaTela(autor, text) {
     mural.prepend(cartao);
 }
 
-// 2. Evento de Enviar Novo Causo
+ 
 botaoEnviar.addEventListener('click', async function(evento) {
     evento.preventDefault(); 
 
@@ -80,7 +80,7 @@ botaoEnviar.addEventListener('click', async function(evento) {
 
     const autor = nomeDigitado.trim() === "" ? "anônimo" : nomeDigitado;
 
-    // Salva no Supabase
+  
     const { data, error } = await supabaseClient
         .from('causos')
         .insert([{ autor: autor, text: textoDigitado }])
@@ -99,5 +99,5 @@ botaoEnviar.addEventListener('click', async function(evento) {
     carregarCausos();
 });
 
-// Quando a página abrir, carrega os causos salvos
+ 
 carregarCausos();
