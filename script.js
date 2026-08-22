@@ -16,29 +16,34 @@ async function carregarCausos() {
     const { data: causos, error } = await supabaseClient
         .from('causos')
         .select('*')
-        .order('id', { ascending: false }); // Se preferir por ID decrescente
+        .order('id', { ascending: false });
 
-  if (error) {
+    if (error) {
         console.error('Erro detalhado do Supabase:', error.message, error.details, error.hint);
-        alert('Erro ao publicar o causo: ' + error.message);
+        alert('Erro ao carregar os causos: ' + error.message);
         return;
     }
 
     mural.innerHTML = ''; // Limpa o "Carregando..."
 
-    // Desenha cada causo na tela
+    if (causos.length === 0) {
+        mural.innerHTML = '<p>Ainda não há causos publicados. Seja o primeiro!</p>';
+        return;
+    }
+
+    // Desenha cada causo na tela (usando causo.text aqui)
     causos.forEach(causo => {
-        criarCartaoNaTela(causo.id, causo.autor, causo.texto);
+        criarCartaoNaTela(causo.id, causo.autor, causo.text);
     });
 }
 
-// Função auxiliar para desenhar o HTML do cartão
-function criarCartaoNaTela(id, autor, texto) {
+// Função auxiliar para desenhar o HTML do cartão (recebendo text)
+function criarCartaoNaTela(id, autor, text) {
     const cartao = document.createElement('div');
     cartao.classList.add('cartao-causo');  
 
     cartao.innerHTML = `
-        <p class="texto-causo">"${texto}"</p>
+        <p class="texto-causo">"${text}"</p>
         <div class="rodape-cartao">
             <span class="autor-causo">${autor}</span>
             <span class="data-causo">hoje</span>
@@ -78,19 +83,19 @@ botaoEnviar.addEventListener('click', async function(evento) {
 
     const autor = nomeDigitado.trim() === "" ? "anônimo" : nomeDigitado;
 
-    // Salva lá no Banco de Dados do Supabase
+    // Salva lá no Banco de Dados do Supabase (enviando a coluna 'text')
     const { data, error } = await supabaseClient
         .from('causos')
-        .insert([{ autor: autor, texto: textoDigitado }])
+        .insert([{ autor: autor, text: textoDigitado }])
         .select();
 
     if (error) {
         console.error('Erro ao salvar:', error);
-        alert('Erro ao publicar o causo.');
+        alert('Erro ao publicar o causo: ' + error.message);
         return;
     }
 
-    // Se salvou com sucesso, limpa os campos e recarrega o mural
+    // Se salvou com sucesso, limpa os campos e esconde o formulário
     document.getElementById('nome').value = '';
     document.getElementById('textoCauso').value = '';
     document.getElementById('caixaFormulario').classList.add('escondido');
