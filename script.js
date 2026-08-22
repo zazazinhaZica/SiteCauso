@@ -1,5 +1,5 @@
 // 1. Conexão com o Supabase (Cole suas credenciais aqui)
-const SUPABASE_URL = 'https://gkvfxmuhoqkvmxpyoqrd.supabase.com';
+const SUPABASE_URL = 'https://gkvfxmuhoqkvmxpyoqrd.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_Vryk6FbOTyTwLCqMkK8hFQ_-WQSz_uN';
 
 // Inicializa o cliente do Supabase
